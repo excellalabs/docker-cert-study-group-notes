@@ -11,6 +11,7 @@
 
 * [Docker Certification site w/Study Guide](https://success.docker.com/certification)
 * [Docker Certified Associate Exam Prep Guide - w/links from exam bullets](https://github.com/Evalle/DCA)
+* [Interactive Scenarios - Kubernetes, Docker, etc - Katakoda](https://www.katacoda.com/courses/kubernetes)
 * [Play with Kubernetes](https://labs.play-with-k8s.com/)
 * [Play with Docker Enterprise](https://medium.com/@marcosnils/60-seconds-away-from-docker-ee-13d7cf66713f)
 * [Docker Swarm Workshop, J. Petazzo](https://github.com/jpetazzo/container.training)
