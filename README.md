@@ -16,6 +16,7 @@
 * [Play with Docker Enterprise](https://medium.com/@marcosnils/60-seconds-away-from-docker-ee-13d7cf66713f)
 * [Docker Swarm Workshop, J. Petazzo](https://github.com/jpetazzo/container.training)
 * [Linux Container from Scratch, Joshua Hoffman](https://vimeo.com/115073286)
+* [Wyn's Kubernetes Workshop](https://github.com/excellalabs/docker-workshop-2)
 
 ## Docker Deep Dive Notes
 
