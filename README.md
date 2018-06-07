@@ -91,3 +91,6 @@
     ```
 
     Want more? Go nuts: https://ops.tips/blog/run-docker-with-forked-runc/
+
+
+8. [Dockerizing an app](README-08-containerizing-an-app.md)
