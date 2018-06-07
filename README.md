@@ -54,3 +54,7 @@
         - images, running containers
         - attaching to running containers
       - Dev perspective - containerize app
+
+
+
+8. [Dockerizing an app](README-08-containerizing-an-app.md)
