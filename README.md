@@ -1,9 +1,5 @@
 ## Meeting Notes
 
-5/31 
-  - Wyn led dicsusion through Docker Deep Dive Chapters 1-4 (see notes below)
-  - Next meeting chapters 5-9, 1 chapter each person
-
 **TODO:**
 - make list of exercises that will train on hands-on, prod bugs, etc
 
