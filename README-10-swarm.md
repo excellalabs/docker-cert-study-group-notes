@@ -78,9 +78,11 @@ First run the `docker swarm join-token` command on the manager to get the join t
 
 Active-passive multi-manager HA - only 1 manager is ever considered active, the *leader*. Only one to issue live commands against the swarm. Passive managers will proxy commands to the leader if they receive them.
 
-Raft consensus algorithm is used for HA. Best practices:
+Raft consensus algorithm is used for HA
   - odd number of managers to prevent split brain conditions (on network partition with 4 managers then 2 on each side, there could be no consensus, knowing there were 2 on the other side but can no longer communicate)
   - don't deploy too many managers (3-5) to keep time low to achieve consensus
+  - Tolerates (N-1)/2 failures
+  - Requires a majority or quorum of (N/2)+1 members to agree on values proposed to the cluster. This means that in a cluster of 5 Managers running Raft, if 3 nodes are unavailable, the system cannot process any more requests to schedule additional tasks. The existing tasks keep running but the scheduler cannot rebalance tasks to cope with failures if the manager set is not healthy.
 
 ### Locking a swarm
 
@@ -92,7 +94,7 @@ Pass --autolock flag when creating swarm or update it with docker swarm update -
 
 Services get improved on by stacks.
 
-Specify name, post, mappings, attaching to networks, images
+Specify name, port, mappings, attaching to networks, images
 
 *Declarative* - feed desired state to docker and let it deploy and manage
 
