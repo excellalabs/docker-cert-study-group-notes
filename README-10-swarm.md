@@ -126,8 +126,6 @@ Up the desired state:
 
 Log driver must support it.
 
-
-
 ## Practice Test Questsions
 
 - [Docker Certified Associate (DCA) Test Review Questions Set 3 – Orchestration](https://djitz.com/certification/docker-certified-associate-dca-test-review-questions-set-3-orchestration/)
