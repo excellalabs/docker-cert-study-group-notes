@@ -79,6 +79,7 @@ First run the `docker swarm join-token` command on the manager to get the join t
 Active-passive multi-manager HA - only 1 manager is ever considered active, the *leader*. Only one to issue live commands against the swarm. Passive managers will proxy commands to the leader if they receive them.
 
 Raft consensus algorithm is used for HA
+  - [Great explanation from Docker Docs](https://docs.docker.com/engine/swarm/raft/)
   - odd number of managers to prevent split brain conditions (on network partition with 4 managers then 2 on each side, there could be no consensus, knowing there were 2 on the other side but can no longer communicate)
   - don't deploy too many managers (3-5) to keep time low to achieve consensus
   - Tolerates (N-1)/2 failures
