@@ -1,13 +1,11 @@
 ## Meeting Notes
 
-**TODO:**
-- make list of exercises that will train on hands-on, prod bugs, etc
-
 ## Resources
 
 * [Docker Certification site w/Study Guide](https://success.docker.com/certification)
 * [Docker Certified Associate Exam Prep Guide - w/links from exam bullets](https://github.com/Evalle/DCA)
 * [Sample test questions](https://djitz.com/certification/https://djitz.com/certification/)
+* [Practice tests on Udemy](https://www.udemy.com/docker-certified-associate-certification-2-practice-exams)
 
 *Exercises*
 * [Interactive Scenarios - Kubernetes, Docker, etc - Katakoda](https://www.katacoda.com/courses/kubernetes)
