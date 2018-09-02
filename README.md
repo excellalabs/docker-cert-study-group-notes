@@ -8,7 +8,7 @@
 * [Practice tests on Udemy](https://www.udemy.com/docker-certified-associate-certification-2-practice-exams)
 
 *Exercises*
-* [Interactive Scenarios - Kubernetes, Docker, etc - Katakoda](https://www.katacoda.com/courses/kubernetes)
+* [Interactive Scenarios - Kubernetes, Docker, etc - Katakoda](https://www.katacoda.com/courses/docker)
 * [Deploy sample app to Swarm](https://github.com/dockersamples/atsea-sample-shop-app)
 * [Docker Swarm Workshop, J. Petazzo](https://github.com/jpetazzo/container.training)
 * [Linux Container from Scratch, Joshua Hoffman](https://vimeo.com/115073286)
@@ -19,80 +19,64 @@
 
 ## Docker Deep Dive Notes
 
-1. Containers from 30,000 feet
-    * What are containers, etc
-    * Windows vs Linux
+1. [Chapter 1-4 notes](README-01-04.md)
 
-1.  Docker
-    * Kubernetes - leading orchestrator, needed for managing deployment and running apps
-    * Docker Engine - plumbing that runs and orchestrates containers
-    * EE vs CE
-    * Moby - tools that combine to make Docker daemon. Breaks dDOcekr into modular components. Big infra contributors. Golang.
-        * Batteries included but removable
-    * Open Container Initiative (OCI) - standardized image format and container runtime
+    **Exercises:**
 
-1. Installing Docker: 
-    - Windows, Mac, Windows Server 2016, Ubuntu, Docker EE, etc
-    - Upgrading Docker: 
-        - make sure containers have restart policy, 
-        - drain nodes if needed (using Swarm mode). 
-        - Steps: 
-            - Stop Docker daemon, remove old version, install new version, configure new version to auto start when system boots, ensure containers restarted.
-    - Docker and storage drivers
-        - Every Docker container gets an area of local storage where image layers are stacked and the container filesystem is mounted. By default this is where all container read/write ops occur, making it integral to the perf and stability of every container.
-        - Local storage area has been managed by storage driver, which are sometiomes called the graph driver. Docker supports several different storage drivers, each which implements layering and copy-on-write in its own way - impacting perf and stability.
-          - Some available drivers:
-              - aufs (the original and oldest)
-              - overlay2 (probably best choice for future)
-              - devicemapper
-              - btrfs
-              - zfs
-          - Windows only supports windowsfilter driver
+    - Configure Docker daemon to start on boot
+    - Which storage driver should be used on what OS? Per node decision. Overlay2 becoming favored.
+    - configure devicemapper
 
-1. The Big Picture
-    - Ops perspective 
-        - Docker client, 
-        - daemon/engine, 
-        - images, running containers
-        - attaching to running containers
-      - Dev perspective - containerize app
+5. [Docker Engine](README-05-docker-engine.md)
 
-1. The Docker Engine
+6. Images
 
-    Docker used to be made up of:
+    **Exercises** 
 
-    - **Docker client**: a cli or lib that talks to the Docker daemon.
+    - Display layers and create new for writes
+    - Tag with multiple and push image to registry
+    - Invalidate image cache and optimize for writing files
+    - Search Docker Hub with `docker search <name>`
 
-    - **Monolithic Docker daemon**: performed __***all***__ docker image workflow tasks and container creation tasks
+7. Containers
 
-    - **LXC**: a system-container solution tailored to the linux kernel
+8. [Containerizing an app](README-08-containerizing-an-app.md)
 
-    This was not only a bad design, but there were some pretty terrible consequences (e.g. if you stop the docker daemon, all of your running containers are killed!). This lead to a major overhaul to break out the functionality into smaller components (using the UNIX philosophy).
+    **Exercises**
+    
+    - create multi-stage build dockerfile
 
-    Docker is now made up of:
-
-    - **Docker client** aka "docker": (unchanged)
-
-    - **Docker daemon** aka "dockerd": responsible for the API, docker workflow tasks, security features, core networking, and volume management. (at least it's not "everything" like it used to be)
-
-    - **containerd**: is a **container execution supervisor** which can manage a complete container lifecycle and enable runtime telemetry.
-
-    - **containerd-shim**: a small process for invoking runc. This is used to keep the STDIO (and other FDs) open for the container incase containerd and/or docker both die. The Shim also reaps the container's exit status and reports the value back to containerd, all without having the be the actual parent of the container's process and do a wait4. This solves the "zombie" reaping problem that has plauged Docker for years.
-
-    - **runc**: is lightweight universal container runtime. Runc is used by containerd for spawning and running containers according to OCI spec. It is essentially a CLI wrapper around libcontainer, the library that replaced LXC. Once the user process starts the runc process exits, allowing for a daemonless container configuration.
-
-
-    How you start a container with this engine from the ground up:
-
-    ```
-    Client <==REST==> Daemon <==GRPC==> containerd > (fork+exec) > containerd-shim + runc > (exec) > your processes
-
-    ```
-
-    Want more? Go nuts: https://ops.tips/blog/run-docker-with-forked-runc/
-
-
-8. [Dockerizing an app](README-08-containerizing-an-app.md)
-
+9. Deploying Apps with Docker Compose
 
 10. [Swarm](README-10-swarm.md)
+
+    **Exercises**
+
+    - Setup a swarm, create 2nd node and join it, run container as service
+    - Run app as stack
+    - Scale
+    - Update app
+    - Run replicated and global service
+    - Apply node labels to manage placement of tasks
+    - Raft consensus to manage cluster state, to keep master replicas have same state - allows (N-1)/2 failures, and requires quorum of (N/2)+1
+
+11. [Docker Networking](README-11-network.md)
+
+12. Docker overlay networking
+    
+    **Exercises**
+
+    - create overlay network on 2+ node swarm, attach a service to it
+
+        1. `docker network create -d overlay my-swarm-overlay`
+        1. `docker service create --name test --network my-swarm-overlay --replicas=2 ubuntu sleep infinity`
+
+13. Volumes and persistent data
+
+14. Deploying apps with Docker Stacks
+
+15. Security in Docker
+
+16. Tools for the enterprise
+
+17. Enterprise-grade features
