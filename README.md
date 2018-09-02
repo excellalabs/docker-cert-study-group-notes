@@ -43,7 +43,7 @@
 8. [Containerizing an app](README-08-containerizing-an-app.md)
 
     **Exercises**
-    
+
     - create multi-stage build dockerfile
 
 9. Deploying Apps with Docker Compose
@@ -77,6 +77,18 @@
 
 15. Security in Docker
 
+    Docker works with its own and latest OS tech for security.
+
+    - Docker tech: secrets management, docker content trust, security scanning
+    - OS (linux) tech: seccomp, mandatory access control, capabilities, control groups, kernel namespaces
+        - Docker utilizes these namespaces: pid, net, mnt, ipc, user, uts
+        - All new containers get a sensible default seecomp profile
+    - Rotate swarm join token, `docker swarm join-token --rotate manager`
+
 16. Tools for the enterprise
 
+    - Installing and backing up/restoring Swarm, UCP, DTR
+    
 17. Enterprise-grade features
+
+    - UCP RBAC, Docker Content Trust (DTC), HTTP routing mesh
