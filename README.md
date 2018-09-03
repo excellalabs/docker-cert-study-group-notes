@@ -21,17 +21,17 @@
 
 1. [Chapter 1-4 notes](README-01-04.md)
 
-    **Exercises:**
+    Exercises:
 
     - Configure Docker daemon to start on boot
     - Which storage driver should be used on what OS? Per node decision. Overlay2 becoming favored.
-    - configure devicemapper
+    - [Configure devicemapper for production](https://docs.docker.com/storage/storagedriver/device-mapper-driver/#configure-direct-lvm-mode-for-production)
 
 5. [Docker Engine](README-05-docker-engine.md)
 
 6. Images
 
-    **Exercises** 
+    Exercises 
 
     - Display layers and create new for writes
     - Tag with multiple and push image to registry
@@ -42,7 +42,7 @@
 
 8. [Containerizing an app](README-08-containerizing-an-app.md)
 
-    **Exercises**
+    Exercises
 
     - create multi-stage build dockerfile
 
@@ -50,7 +50,7 @@
 
 10. [Swarm](README-10-swarm.md)
 
-    **Exercises**
+    Exercises
 
     - Setup a swarm, create 2nd node and join it, run container as service
     - Run app as stack
@@ -64,7 +64,7 @@
 
 12. Docker overlay networking
     
-    **Exercises**
+    Exercises
 
     - create overlay network on 2+ node swarm, attach a service to it
 
@@ -72,6 +72,9 @@
         1. `docker service create --name test --network my-swarm-overlay --replicas=2 ubuntu sleep infinity`
 
 13. Volumes and persistent data
+
+    - 
+    - 
 
 14. Deploying apps with Docker Stacks
 
@@ -88,6 +91,7 @@
 16. Tools for the enterprise
 
     - Installing and backing up/restoring Swarm, UCP, DTR
+    - [Disaster Recovery for UCP & DTR](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/)
     
 17. Enterprise-grade features
 
