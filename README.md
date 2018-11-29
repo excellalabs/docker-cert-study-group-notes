@@ -80,19 +80,52 @@
 
 15. Security in Docker
 
-    Docker works with its own and latest OS tech for security.
+    - All about layers: Linux & Docker platform security tech
+    - Docker has moderately secure defaults
 
     - Docker tech: secrets management, docker content trust, security scanning
+        - Swarm mode is secure by default using things like 
+            - cryptographic node IDs, 
+            - mutual auth, 
+            - auto CA config, 
+            - auto cert rotation, 
+            - encrypted cluster store, 
+            - encrypted networks
+        - Docker Content Trust lets you sign images and verify their integrity & publisher
+        - Docker Security Scanning analyses images for known vulerabilities
+        - Docker secrets are first-class citizens, stored in encrypted data store, encrypted in flight, stored in in-memory filesystems when in use, operate a least privledge model
+        - When a Swarm is set up, it becomes the root CA, default of 90 days for cert rotation
+        - Swarm token has a pattern you can match to prevent repo check-in
+    
     - OS (linux) tech: seccomp, mandatory access control, capabilities, control groups, kernel namespaces
-        - Docker utilizes these namespaces: pid, net, mnt, ipc, user, uts
+        - Docker containers utilize these namespaces: pid, net, mnt, ipc, user, uts
         - All new containers get a sensible default seecomp profile
+        - Docker prevents containers from adding back removed capabilities
+        - seccomp - Docker uses in filter mode to limit syscalls a container can make to the host's kernel. All containers get a default seccomp profile with moderate security.
+
     - Rotate swarm join token, `docker swarm join-token --rotate manager`
 
 16. Tools for the enterprise
 
-    - Installing and backing up/restoring Swarm, UCP, DTR
+    - Components of Docker Enterprise:
+        - Docker Trusted Registry - secure on-prem registry
+        - Universal Control Plane (UCP) - Enterprise-grade operations UI
+        - Docker EE - hardened & certified container engine
+        - Certified OSes and cloud platforms - certified infrastructure
+    - Planning a UCP installation - 
+        - all nodes should have a static IP and stable DNS name
+        - Odd number of managers. 5 is best for backup schedule. More than 7 has back-end Raft and cluster reconciliation issues (workers don't participate in Raft. You can have any number.)
+        - Manager nodes should be spread acress availability zones in a single region; need high-speed connections
+    - Installing and backing up/restoring Swarm, UCP, DTR (need to be done separately. First Swarm, than UCP)
+        - DTR - can be made HA using shared storage. DTR backup doesn't include images as the backup of the storage backend is considered separate. 
     - [Disaster Recovery for UCP & DTR](https://docs.docker.com/datacenter/ucp/2.2/guides/admin/backups-and-disaster-recovery/)
     
 17. Enterprise-grade features
 
-    - UCP RBAC, Docker Content Trust (DTC), HTTP routing mesh
+    - UCP 
+        - RBAC
+        - LDAP integration
+    - Docker Content Trust (DTC)
+        - all images are verified
+        - can set up build pipelines that only promote the image if it passes scanning
+    - HTTP routing mesh: Swarm Routing Mesh is layer 4 so balances load w/o knowledge of the app. UCP implements the HTTP Routing Mesh (HRM) which implements a layer 7 routing mash
